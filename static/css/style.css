@@ -1,7 +1,14 @@
 * {
   /* border: 1px grey solid; */
 }
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+table {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 body {
@@ -17,10 +24,15 @@ body {
   width: 100rem;
   border: 2px solid black;
 }
-.about h3 {
+.card {
   background-color: lightgray;
+  opacity: 0.9;
+  border: 1px solid black;
 }
-
+img:hover {
+  cursor: pointer;
+  border: 2px solid white;
+}
 table {
   border-style: double;
   border-color: white;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Heard V. Depp</title>
+    <title>Depp v. Heard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,28 +18,52 @@
     </h1>
 
     <section class="main">
-      <div class="row">
-        <div class="col depp" style="border: 2px solid red">
+      <div class="row d-flex">
+        <div class="col depp">
           <div class="col-8 mx-auto headshot">
-            <img
-              class="img-fluid d-block"
-              src="https://imdb-api.com/images/original/MV5BMTM0ODU5Nzk2OV5BMl5BanBnXkFtZTcwMzI2ODgyNQ@@._V1_Ratio0.7003_AL_.jpg"
-              ;
-              alt=""
-            />
-          </div>
-          <div style="background-color: azure" class="about" id="about-depp">
-            <h3>Summary</h3>
+            <a href="depp.html">
+              <span
+                class="d-inline-block"
+                tabindex="0"
+                data-bs-toggle="popover"
+                data-bs-trigger="hover focus"
+                data-bs-placement="bottom"
+                data-bs-content="Click for more about Johnny"
+              >
+                
+              <img
+                class="img-fluid d-block"
+                src="../static/images/depp-court-heashot.jpg"
+                alt=""
+            /></a>
+              </span>
           </div>
         </div>
-        <div class="col heard" style="border: 2px solid red">
+        <div class="col heard">
           <div class="col-8 mx-auto headshot">
-            <img
-              class="img-fluid d-block"
-              src="https://imdb-api.com/images/original/MV5BMjA4NDkyODA3M15BMl5BanBnXkFtZTgwMzUzMjYzNzM@._V1_Ratio0.9968_AL_.jpg"
-              alt=""
-            />
+            <a href="heard.html">
+                <span
+                class="d-inline-block"
+                tabindex="0"
+                data-bs-toggle="popover"
+                data-bs-trigger="hover focus"
+                data-bs-placement="bottom"
+                data-bs-content="Click for more about Amber"
+              >
+              <img
+                class="img-fluid d-block"
+                src="../static/images/heard-court-headshot.jpg"
+                alt=""
+            /></a>
+        </span>
+
           </div>
+        </div>
+
+        <div class="row d-flex">
+          <div class="col details" id="about-depp"></div>
+
+          <div class="col details" id="about-heard"></div>
         </div>
       </div>
     </section>
