@@ -1,62 +1,34 @@
-let deppURL = "https://imdb-api.com/en/API/Name/k_08e2ou23/nm0000136";
-let heardURL = "https://imdb-api.com/en/API/Name/k_08e2ou23/nm1720028";
+let deppURL = "https://imdb-api.com/en/API/Name/k_4fnl8773/nm0000136";
+let heardURL = "https://imdb-api.com/en/API/Name/k_4fnl8773/nm1720028";
 
 window.onload = init;
 
-const dummyData = [
-  {
-    description: "W. Eugene Smith",
-    filmAffinity: "6.1",
-    id: "tt9179096",
-    imDb: "7.3",
-    metacritic: "55",
-    role: "Actor",
-    rottenTomatoes: "78",
-    theMovieDb: "7.0",
-    title: "Minamata",
-    year: "2020",
-  },
-  {
-    description: "Hatter Tarrant Hightopp",
-    filmAffinity: "5.4",
-    id: "tt2567026",
-    imDb: "6.1",
-    metacritic: "34",
-    role: "Actor",
-    rottenTomatoes: "28",
-    theMovieDb: "6.5",
-    title: "Alice Through the Looking Glass",
-    year: "2016",
-  },
-];
 function init() {
-  // fetchMovieList(deppURL);
-  // fetchMovieList(heardURL);
-  // buildTable(fetchMovieList(deppURL), "depp-table");
-  // buildTable(fetchMovieList(heardURL), "heard-table");
+  // fetchMovieList(deppURL, "depp-table");
+  // fetchMovieList(heardURL, "heard-table");
 }
 
-function buildTable(data, targetId) {
+async function buildTableRow(movie, targetId) {
   let targetEle = document.getElementById(targetId);
+  console.log("building table row with: ");
+  console.log(movie);
+  let newRow = document.createElement("tr");
 
-  for (let i = 0; i < data.length; i++) {
-    let movie = data[i];
-    let newRow = document.createElement("tr");
-    newRow.className = "text-end";
-    newRow.innerHTML = `
-      <th scope="row">${movie.year}</th>
-      <td>${movie.title}</td>
-      <td>${movie.imDb}</td>
-      <td>${movie.metacritic}%</td>
-      <td>${movie.rottenTomatoes}%</td>
-      <td>${movie.theMovieDb}</td>
-      <td>${movie.filmAffinity}</td>`;
+  newRow.innerHTML = `
+        <th scope="row">${movie.year}</th>
+        <td>${movie.title}</td>
+        <td>${movie.imDb}</td>
+        <td>${movie.metacritic}%</td>
+        <td>${movie.rottenTomatoes}%</td>
+        <td>${movie.theMovieDb}</td>
+        <td>${movie.filmAffinity}</td>`;
 
-    targetEle.childNodes[3].appendChild(newRow);
-  }
+  // console.log(newRow);
+  targetEle.childNodes[3].appendChild(newRow);
 }
 
-async function fetchMovieList(path) {
+async function fetchMovieList(path, targetID) {
+  console.log("fetching movies");
   try {
     const res = await fetchWithTimeout(path, { timeout: 5000 }).catch((e) => {
       console.log(e);
@@ -74,30 +46,37 @@ async function fetchMovieList(path) {
     let moviesArray = [];
 
     for (let i = 0; i < castMovies.length; i++) {
+      // for (let i = 0; i < 10; i++) {
       if (castMovies[i].role == "Actor" || castMovies[i].role == "Actress") {
         let movieId = castMovies[i].id;
-        const ratingPromise = getRatings(movieId);
-        ratingPromise.then((result) => {
-          let movie = castMovies[i];
-          movie["imDb"] = result["imDb"];
-          movie["metacritic"] = result["metacritic"];
-          movie["theMovieDb"] = result["theMovieDb"];
-          movie["rottenTomatoes"] = result["rottenTomatoes"];
-          movie["filmAffinity"] = result["filmAffinity"];
+        const result = getRatings(movieId);
+        result.then((result) => {
+          if (
+            result["imDb"] &&
+            result["metacritic"] &&
+            result["theMovieDb"] &&
+            result["rottenTomatoes"] &&
+            result["filmAffinity"]
+          ) {
+            let movie = castMovies[i];
+            movie["imDb"] = result["imDb"];
+            movie["metacritic"] = result["metacritic"];
+            movie["theMovieDb"] = result["theMovieDb"];
+            movie["rottenTomatoes"] = result["rottenTomatoes"];
+            movie["filmAffinity"] = result["filmAffinity"];
 
-          moviesArray.push(movie);
+            buildTableRow(movie, targetID);
+          }
         });
       }
     }
-    // console.log(moviesArray);
-    return moviesArray;
   } catch (error) {
     console.log(error);
   }
 }
 
 async function getRatings(movieId) {
-  let movieRatingURL = "https://imdb-api.com/en/API/Ratings/k_08e2ou23/".concat(
+  let movieRatingURL = "https://imdb-api.com/en/API/Ratings/k_4fnl8773/".concat(
     movieId
   );
 

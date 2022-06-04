@@ -8,7 +8,8 @@ h4,
 h5,
 h6,
 p,
-table {
+table,
+form {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 body {
@@ -41,7 +42,41 @@ thead {
   background: grey;
   opacity: 0.95;
 }
-tbody {
+tbody,
+#form {
   background: lightgrey;
-  opacity: 0.99;
+  opacity: 0.96;
+}
+tr {
+  border: 1px solid black;
+}
+.anchor {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  border-radius: 10px;
+}
+.anchor:hover {
+  color: white;
+  background-color: darkslategrey;
+}
+.card,
+#form,
+#header {
+  box-shadow: 8px 8px 12px 1px #252525;
+}
+#form {
+  margin-top: 10rem;
+}
+#custom_alert {
+  display: none;
+  width: 300px;
+  position: absolute;
+  top: 20rem;
+  left: 43rem;
+  border-radius: 10px;
+  border: 3px solid gold;
+  padding: 10px;
+  color: white;
+  background-color: rgb(40, 48, 48);
 }
