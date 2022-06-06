@@ -1,6 +1,7 @@
 "use strict";
 console.log("main.js loaded");
 
+// Used for image popover
 const popoverTriggerList = document.querySelectorAll(
   '[data-bs-toggle="popover"]'
 );
@@ -16,10 +17,8 @@ const API_URL = {
 };
 
 function init() {
-  document.myForm.name.focus();
-
-  //   getActorDetails(API_URL.allThingsDepp);
-  //   getActorDetails(API_URL.allThingsHeard);
+  getActorDetails(API_URL.allThingsDepp);
+  getActorDetails(API_URL.allThingsHeard);
 }
 
 async function getActorDetails(url) {
@@ -43,9 +42,9 @@ async function getActorDetails(url) {
 
       // moviesList: () => {};
     };
-    console.log(details);
+    // console.log(details);
     buildActorDetailsDOM(details);
-    return details;
+    // return details;
   } catch (error) {
     console.log("failed loading details");
   }
@@ -89,48 +88,3 @@ async function fetchWithTimeout(resource, options = {}) {
   clearTimeout(id);
   return response;
 }
-
-const form = document.getElementById("myForm");
-const submit = document.getElementById("submit-btn");
-const deppLiable = document.getElementById("gridCheckDepp");
-
-form.addEventListener("submit", (event) => {
-  console.log("submitting form");
-  console.log(event);
-  event.preventDefault();
-  var deppVerdictMsg =
-    form.deppVerdict.value == "depp-guilty" ? "Guilty" : "Innocent";
-  var heardVerdictMsg =
-    form.heardVerdict.value == "heard-guilty" ? "Guilty" : "Innocent";
-  let liableMsg = "Liable for damages";
-  let notLiableMsg = "Not liable for damages";
-  if (
-    form.name.validity.valid &&
-    form.email.validity.valid &&
-    form.deppVerdict.validity.valid &&
-    form.heardVerdict.validity.valid
-  ) {
-    let alert = document.getElementById("custom_alert");
-    var newBtn = document.createElement("button");
-    newBtn.className = "btn btn-warning fw-bold my-2";
-    newBtn.id = "close_btn";
-    newBtn.innerHTML = "Close";
-
-    alert.innerHTML = `
-    <h4>${form.name.value}</h4>
-    <h5>Your verdict has been cast!</h5>
-    <h6>Johnny Deep: ${deppVerdictMsg}<br>${
-      form.deppLiable.checked ? "Liable for damages" : "Not liable for damages"
-    }</h6>
-    <h6>Amber Heard: ${heardVerdictMsg}<br>${
-      form.heardLiable.checked ? "Liable for damages" : "Not liable for damages"
-    }</h6>`;
-
-    alert.appendChild(newBtn);
-    alert.style.display = "block";
-
-    newBtn.addEventListener("click", () => {
-      alert.style.display = "none";
-    });
-  }
-});

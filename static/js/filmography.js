@@ -1,17 +1,19 @@
+"use strict";
+
 let deppURL = "https://imdb-api.com/en/API/Name/k_4fnl8773/nm0000136";
 let heardURL = "https://imdb-api.com/en/API/Name/k_4fnl8773/nm1720028";
 
 window.onload = init;
 
 function init() {
-  // fetchMovieList(deppURL, "depp-table");
-  // fetchMovieList(heardURL, "heard-table");
+  fetchMovieList(deppURL, "depp-table");
+  fetchMovieList(heardURL, "heard-table");
 }
 
 async function buildTableRow(movie, targetId) {
   let targetEle = document.getElementById(targetId);
-  console.log("building table row with: ");
-  console.log(movie);
+  // console.log("building table row with: ");
+  // console.log(movie);
   let newRow = document.createElement("tr");
 
   newRow.innerHTML = `
@@ -43,7 +45,6 @@ async function fetchMovieList(path, targetID) {
 
     const actorDetails = await res.json();
     const castMovies = actorDetails["castMovies"];
-    let moviesArray = [];
 
     for (let i = 0; i < castMovies.length; i++) {
       // for (let i = 0; i < 10; i++) {

@@ -68,12 +68,13 @@ tr {
 #form {
   margin-top: 10rem;
 }
+
 #custom_alert {
   display: none;
   width: 300px;
   position: absolute;
-  top: 20rem;
-  left: 43rem;
+  top: 15rem;
+  right: 44rem;
   border-radius: 10px;
   border: 3px solid gold;
   padding: 10px;
