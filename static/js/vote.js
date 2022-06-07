@@ -23,7 +23,7 @@ form.addEventListener("submit", (event) => {
     alert.innerHTML = `
     <h4>${form.name.value}</h4>
     <h5>Your verdict has been cast!</h5>
-    <h6>Johnny Deep: ${deppVerdictMsg}<br>${
+    <h6>Johnny Depp: ${deppVerdictMsg}<br>${
       form.deppLiable.checked ? "Liable for damages" : "Not liable for damages"
     }</h6>
     <h6>Amber Heard: ${heardVerdictMsg}<br>${
